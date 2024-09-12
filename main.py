@@ -66,6 +66,8 @@ print(y)
 
 #dividir el data set en conjunto de entrenamiento y conjunto de testing
 
+
+#Esta línea importa la función train_test_split de la biblioteca scikit-learn, que se utiliza para dividir un conjunto de datos en conjuntos de entrenamiento y prueba.
 from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test= train_test_split(x,y, test_size=0.2, random_state=0)
 
@@ -77,5 +79,19 @@ y: Este es el conjunto de la variable objetivo (target) que se desea predecir.
 test_size=0.2: Este parámetro indica que el 20% de los datos se utilizarán para el conjunto de prueba, mientras que el 80% restante se utilizará para el conjunto de entrenamiento. Esto es una práctica común para asegurarse de que el modelo tenga suficientes datos para aprender y también para evaluar su rendimiento.
 random_state=0: Este parámetro establece una semilla para el generador de números aleatorios. Esto asegura que la división de los datos sea reproducible. Si ejecutas el código varias veces con el mismo random_state, obtendrás la misma división de datos cada vez.
 '''
+#escalado de variables
+#Esta línea importa la clase StandardScaler de la biblioteca scikit-learn. StandardScaler se utiliza para escalar características (features) de manera que tengan una media de 0 y una desviación estándar de 1.
+from sklearn.preprocessing import StandardScaler
+sc_X = StandardScaler() #sc_X = StandardScaler(): Aquí se crea una instancia del escalador. Este objeto se utilizará para ajustar y transformar los datos.
 
+'''
+Ajuste (fit): Calcula la media y la desviación estándar de las características en el conjunto de entrenamiento (x_train).
+Transformación (transform): Escala las características del conjunto de entrenamiento utilizando la media y la desviación estándar calculadas. El resultado es que cada característica tendrá una media de 0 y una desviación estándar de 1.
+'''
+x_train= sc_X.fit_transform(x_train)
+'''
+Esta línea transforma el conjunto de prueba (x_test) utilizando la misma media y desviación estándar 
+que se calcularon a partir del conjunto de entrenamiento. Es importante no ajustar el escalador 
+'''
+x_test=sc_X.transform(x_test)
 

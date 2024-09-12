@@ -21,8 +21,21 @@ dataset$Country = factor(dataset$Country,
                          levels = c('France','Spain', 'Germany'),
                          labels = c(1,2,3))
 
-dataset$Country = factor(dataset$Country,
-                         levels = c('France','Spain', 'Germany'),
-                         labels = c(1,2,3))
+dataset$Purchased = factor(dataset$Purchased,
+                         levels = c('Yes','No'),
+                         labels = c(1,2))
+
+#install.packages("caTools")
+#dividir los datos en conjunto de entrenamiento y conjunto de prueba 
+set.seed(123)
+split=sample.split(dataset$Purchased, SplitRatio = 0.8)
+training_set = subset(dataset, split==TRUE)
+testing_Set = subset(dataset, split==FALSE)
+
+#escalado de valores
+training_set[,2:3]= scale(training_set[,2:3])
+testing_Set[,2:3]= scale(testing_Set[,2:3])
+
+
 
 

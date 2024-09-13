@@ -25,8 +25,14 @@ dataset$Purchased = factor(dataset$Purchased,
                          levels = c('Yes','No'),
                          labels = c(1,2))
 
+dataset$Country
+
+dataset$Purchased
+
+
 #install.packages("caTools")
 #dividir los datos en conjunto de entrenamiento y conjunto de prueba 
+library(caTools)
 set.seed(123)
 split=sample.split(dataset$Purchased, SplitRatio = 0.8)
 training_set = subset(dataset, split==TRUE)

@@ -1,3 +1,21 @@
+#IMPORTANTE!!!
+
+'''
+SE SIGUEN LOS SIGUIENTES PROCESOS CON ESTE DATASET
+PRIMERO: SE IMPORTA EL DATASET Y SE SEPARA LAS CARACTERISTICAS QUE SERIAN LAS EL SUBCONJUNTO "X"
+QUE REPRESENTAN LAS CARACTERISTICAS DEL CONJUNTO (FEATURES) Y "Y"  QUE SON LAS VARIABLES A PREDECIR (TARGET)
+SEGUNDO: SE TRATA LAS VARIABLES NA DEL DATASET
+TERCERO:CONVIERTE EN VARIABLES CATEGORICAS UNA PARTE DEL DATASET
+CUARTO:dividir el data set en conjunto de entrenamiento y conjunto de testing
+QUINTO: ESCALAR LAS VARIABLES
+
+LO ESCRIBO DE ESTA FORMA PORQUE EL SEGUNDO Y EL TERCERO NO SE PUEDEN LLLEGAR A USAR POR QUE NO
+
+
+'''
+
+
+
 import matplotlib.pyplot as plt  # Importa la biblioteca matplotlib para crear gráficos. Se utiliza 'pyplot' para acceder a funciones de visualización.
 import numpy as np  # Importa la biblioteca NumPy, que proporciona soporte para arreglos y operaciones matemáticas.
 import pandas as pd  # Importa la biblioteca pandas, que se utiliza para la manipulación y análisis de datos.
@@ -13,56 +31,7 @@ x = dataset.iloc[:, :-1].values  # Selecciona todas las filas y todas las column
 y = dataset.iloc[:, 3].values  # Selecciona todas las filas de la cuarta columna (índice 3). 
 # Esto se almacena en 'y', que representa la variable objetivo (target) que se desea predecir.
 
-# Tratamiento de los NAs (valores nulos)
-from sklearn.impute import SimpleImputer  # Importa la clase SimpleImputer de scikit-learn, que se utiliza para manejar valores nulos.
 
-# Crear el objeto SimpleImputer
-imputer = SimpleImputer(missing_values=np.nan, strategy="mean")  # Crea una instancia de SimpleImputer. 
-# 'missing_values=np.nan' indica que los valores nulos se representan como np.nan. 
-# 'strategy="mean"' especifica que los valores nulos se reemplazarán por la media de la columna correspondiente.
-
-# Ajustar el imputer a los datos y transformar
-imputer = imputer.fit(x[:, 1:3])  # Ajusta el imputer a los datos en las columnas 1 y 2 de 'x'. 
-# Esto calcula la media de estas columnas, que se utilizará para reemplazar los valores nulos.
-x[:, 1:3] = imputer.transform(x[:, 1:3])  # Aplica la transformación a las columnas 1 y 2 de 'x', reemplazando los valores nulos con la media calculada.
-
-#print(x)  # Imprime el array 'x' después de haber reemplazado los valores nulos.
-
-
-
-# Codificar datos categóricos desde la columna  Country
-
-
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
-from sklearn.compose import ColumnTransformer  # Importa ColumnTransformer
-
-
-
-
-# Codificar la primera columna (categórica)
-#LabelEncoder: Esta clase se utiliza para convertir etiquetas categóricas en números enteros. Por ejemplo, si tienes una columna con valores como "Rojo", "Verde" y "Azul", LabelEncoder los transformará en 0, 1 y 2, respectivamente.
-labelencoder_x = LabelEncoder()
-x[:, 0] = labelencoder_x.fit_transform(x[:, 0])  # Codifica la columna categórica
-
-# Usar ColumnTransformer para aplicar OneHotEncoder
-#En el argumento de ColumnTransformer, se pasa una lista de transformaciones. En este caso, se aplica OneHotEncoder a la primera columna (índice 0) del array x.
-#remainder='passthrough' significa que todas las columnas que no se especifican en la lista de transformaciones se mantendrán sin cambios en el resultado. Esto es útil para conservar las características numéricas que no necesitan ser transformadas.
-ct = ColumnTransformer([("onehot", OneHotEncoder(), [0])], remainder='passthrough')  # Aplica OneHotEncoder a la primera columna
-# fit_transform se utiliza en el objeto ct para ajustar el ColumnTransformer a los datos de x y aplicar las transformaciones especificadas.
-x = ct.fit_transform(x)  
-
-'''
-La columna Country es categórica y necesita ser convertida a un 
-formato numérico. Usamos LabelEncoder para convertir los nombres de los países en números enteros 
-y luego OneHotEncoder para crear variables binarias.
-'''
-
-print(x)  # Imprime el array 'x' después de la transformación
-
-labelencoder_y=LabelEncoder()
-y= labelencoder_y.fit_transform(y)
-
-print(y)
 
 #dividir el data set en conjunto de entrenamiento y conjunto de testing
 

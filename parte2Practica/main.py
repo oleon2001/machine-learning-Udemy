@@ -43,15 +43,25 @@ regresion.fit(x_train,y_train)
 y_pred= regresion.predict(x_test)
 
 #visualizacion de los datos de entrenamiento
-def visualizar_grafica():
+def visualizar_grafica_entrenamiento():
     plt.scatter(x_train, y_train, color="red")
     plt.plot(x_train, regresion.predict(x_train), color="blue")
     plt.title("Sueldo vs años de experiencia (conjunto de entrenamiento)")
     plt.xlabel("años de experiencia")
     plt.ylabel("sueldo en $")
     return plt.show()
+
+def visualizar_grafica_prueba():
+    plt.scatter(x_test, y_test, color="red")
+    plt.plot(x_train, regresion.predict(x_train), color="blue")
+    plt.title("Sueldo vs años de experiencia (conjunto de prueba)")
+    plt.xlabel("años de experiencia")
+    plt.ylabel("sueldo en $")
+    return plt.show()
     
     
-visualizar_grafica()
+visualizar_grafica_entrenamiento()
+
+visualizar_grafica_prueba()
 
 

@@ -19,4 +19,28 @@ testing_Set = subset(dataset, split==FALSE)
 
 
 #ajustar el modelo de regresion lineal multiple con el conjunto de entrenamiento 
-regression = lm(formula = Profit ~ R.D.Spend + Administration + Marketing.Spend + State)
+#regression = lm(formula = Profit ~ R.D.Spend + Administration + Marketing.Spend + State)
+regression = lm(formula = Profit ~ R.D.Spend, data = training_set)
+
+# Predecir los resultados con el conjunto de testing 
+y_pred = predict(regression, newdata = testing_Set)
+
+#Construir un modelo de regresion lineal hacia atras
+SL=0.05
+regression = lm(formula = Profit ~ R.D.Spend + Administration + Marketing.Spend + State , 
+                data = dataset)
+summary(regression)
+
+regression = lm(formula = Profit ~ R.D.Spend + Administration + Marketing.Spend, 
+                data = dataset)
+summary(regression)
+
+regression = lm(formula = Profit ~ R.D.Spend + Administration , 
+                data = dataset)
+summary(regression)
+
+
+regression = lm(formula = Profit ~ R.D.Spend  , 
+                data = dataset)
+summary(regression)
+

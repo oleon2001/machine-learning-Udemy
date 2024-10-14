@@ -1,4 +1,4 @@
-#regresion polinomica
+# plantilla de modelo de regresion polinomica#regresion polinomica
 
 import matplotlib.pyplot as plt  # Visualización
 import numpy as np  # Operaciones numéricas
